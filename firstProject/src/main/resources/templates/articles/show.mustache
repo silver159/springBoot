@@ -1,0 +1,43 @@
+<!-- header template 적용 -->
+{{>./layouts/header}}
+
+<table class="table">
+	<thead>
+		<tr>
+			<th scope="col">id</th>
+			<th scope="col">title</th>
+			<th scope="col">content</th>
+		</tr>
+	</thead>
+	<tbody>
+<!-- mustache에서 Model 인터페이스 객체에 저장되서 넘어오는 데이터의 사용 범위를 지정한다. -->
+		{{#article}} <!-- article 사용 범위 시작 -->
+		<tr>
+			<td>{{id}}</td>
+			<td>{{title}}</td>
+			<td>{{content}}</td>
+		</tr>
+		{{/article}} <!-- article 사용 범위 끝 -->
+	</tbody>
+</table>
+
+<!-- 돌아가기(목록보기) 링크 추가 -->
+<a href="/articles" class="btn btn-outline-success btn-sm">목록보기</a>
+
+<!-- 수정하기 링크 추가 -->
+<!-- <a href="/articles/{{id}}/edit" class="btn btn-success">수정하기</a> -->
+<!-- 
+	article 사용범위 외부에서는 Model 인터페이스 객체에 저장되서 넘어오는 데이터에 "."을 
+	찍어 접근한다. 
+-->
+<a href="/articles/{{article.id}}/edit" class="btn btn-outline-success btn-sm">수정하기</a>
+<!-- 글 삭제하기 링크 추가 -->
+<!-- delete 방식으로 처리해야 하지만 지금은 <a> 태그로 처리하고 나중에 js로 처리한다. -->
+<a href="/articles/{{article.id}}/delete" class="btn btn-outline-success btn-sm">삭제하기</a>
+
+<!-- 댓글 출력 템플릿을 삽입한다. -->
+{{>./comments/comment}}
+
+
+<!-- footer template -->
+{{>./layouts/footer}}

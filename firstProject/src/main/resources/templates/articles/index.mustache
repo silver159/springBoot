@@ -1,0 +1,41 @@
+<!-- header template 적용 -->
+{{>./layouts/header}}
+
+<table class="table">
+	<thead>
+		<tr>
+			<th scope="col">id</th>
+			<th scope="col">title</th>
+			<th scope="col">content</th>
+		</tr>
+	</thead>
+	<tbody>
+<!-- 
+	Model 인터페이스 객체에 저장되서 넘어오는 데이터가 List 형식의 묶음 데이터일 경우 
+	자동으로 사용 범위 시작 부터 끝 까지 반복 처리를 한다. 
+-->
+		{{#articleList}} <!-- 
+		article 사용 범위 시작, #는 Model 인터페이스 객체로 넘어온 데이터가 있으면 -->
+		<tr>
+			<td>{{id}}</td>
+			<!-- 상세 글 보기 링크 추가 -->
+			<td>
+				<a href="/articles/{{id}}">{{title}}</a>
+			</td>
+			<td>{{content}}</td>
+		</tr>
+		{{/articleList}} <!-- article 사용 범위 끝 -->
+		{{^articleList}} <!-- 
+		article 사용 범위 시작, ^는 Model 인터페이스 객체로 넘어온 데이터가 없으면 -->
+		<tr>
+			<td colspan="3">저장된 글이 없습니다.</td>
+		</tr>
+		{{/articleList}} <!-- article 사용 범위 끝 -->
+	</tbody>
+</table>
+
+<!-- 새글쓰기 링크 추가 -->
+<a href="/articles/new" class="btn btn-success">글쓰기</a>
+
+<!-- footer template -->
+{{>./layouts/footer}}

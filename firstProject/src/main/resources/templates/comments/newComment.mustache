@@ -1,0 +1,72 @@
+<div class="card border-primary mb-3">
+	<div class="card-body">
+		<!-- 댓글 작성 폼 -->
+		<form>
+			<!-- 닉네임 입력 -->
+			<div class="mb-3">
+				<label class="form-label">닉네임</label>
+				<input class="form-control form-control-sm" id="new-comment-nickname"/>
+			</div>
+			<!-- 댓글 입력 -->
+			<div class="mb-3">
+				<label class="form-label">댓글 입력</label>
+				<textarea 
+					class="form-control form-control-sm" 
+					rows="3" 
+					style="resize:none;"
+					id="new-comment-body"
+				></textarea>
+			</div>
+			
+			<!-- 
+				입력하는 댓글이 어떤 메인글의 댓글인가 지정하기 위해서 메인글의 id를 
+				hidden으로 전달한다. 
+			-->
+			<input type="hidden" id="new-comment-article-id" value="{{article.id}}">
+			
+			<!-- 저장 버튼 -->
+			<button 
+				type="button" 
+				class="btn btn-outline-primary btn-sm" 
+				id="comment-create-btn">
+				댓글 저장
+			</button>
+		</form>
+	</div>
+</div>
+
+<script type="text/javascript">
+{
+// 댓글 저장 버튼을 선택해서 click 이벤트를 걸어준다.
+	const commentCreateBtn = document.querySelector('#comment-create-btn');
+	commentCreateBtn.addEventListener('click', () => {
+		console.log('저장 버튼이 클릭되었습니다.');
+		// 댓글 javascript 객체를 생성한다.
+		const comment = {
+				nickname: document.querySelector('#new-comment-nickname').value,
+				body: document.querySelector('#new-comment-body').value,
+				article_id: document.querySelector('#new-comment-article-id').value
+		}
+		console.log(comment);
+		console.log(JSON.stringify(comment)); // {"nickname":"1","body":"1","article_id":"4"}
+		
+		// fetch Ajax를 이용해서 REST APT를 호출한다.
+		const url = '/api/comments/'+ comment.article_id +'/comments';
+		console.log(url);
+		fetch(url,{
+			method: 'POST', // POST 요청
+			body: JSON.stringify(comment), // javascript 객체를 json으로 변경한다.
+			headers: {
+				'content-Type': 'application/json'
+			}
+		}).then(response => {
+			console.log(response);
+			const msg = response.ok ? '댓글 등록 성공' : '댓글 등록 실패';
+			alert(msg);
+			// 현재 페이지를 새로고침 한다.
+			location.reload();
+		});
+		
+	});
+}	
+</script>

@@ -1,0 +1,4 @@
+content-types/org.eclipse.jdt.core.javaProperties/charset=UTF-8
+content-types/org.eclipse.wst.html.core.htmlsource/file-extensions=mustache
+content-types/org.springframework.ide.eclipse.applicationProperties/charset=UTF-8
+eclipse.preferences.version=1

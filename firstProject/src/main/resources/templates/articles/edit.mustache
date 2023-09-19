@@ -1,0 +1,30 @@
+<!-- header template 적용 -->
+{{>./layouts/header}}
+
+{{#article}}
+<form class="container p-5" action="/articles/update" method="post">
+	<!-- 
+		수정할 글의 id를 컨트롤러로 전달하기 위해서 hidden으로 추가한다.
+		커맨드 객레로 받기 위해 DTO에 id를 추가한다.
+	-->	
+	<input type="hidden" name="id" value="{{id}}">
+	<div class="mb-3">
+		<label class="form-label" onclick="a()">제목</label>
+		<input type="text" class="form-control" name="title" value="{{title}}">
+	</div>
+	<div class="mb-3">
+		<label class="form-label">내용</label>
+		<textarea class="form-control" rows="3" name="content" style="resize: none">{{content}}</textarea>
+	</div>
+	
+	<!-- 수정하기 링크 추가 -->
+	<button type="submit" class="btn btn-success">수정하기</button>
+	<!-- 목록보기 링크 추가 -->
+	<a href="/articles" class="btn btn-success">목록보기</a>
+	<!-- 돌아가기 링크 추가 -->
+	<a href="/articles/{{id}}" class="btn btn-success">돌아가기</a>
+</form>
+{{/article}}
+
+<!-- footer template -->
+{{>./layouts/footer}}

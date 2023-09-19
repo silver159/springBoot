@@ -1,0 +1,21 @@
+<!-- header template 적용 -->
+{{>./layouts/header}}
+
+<!-- content -->
+<form class="container p-5" action="/articles/create" method="post">
+	<div class="mb-3">
+		<label class="form-label" onclick="a()">제목</label>
+		<input type="text" class="form-control" name="title">
+	</div>
+	<div class="mb-3">
+		<label class="form-label">내용</label>
+		<textarea class="form-control" rows="3" name="content" style="resize: none"></textarea>
+	</div>
+	<button type="submit" class="btn btn-success">저장</button>
+	<!-- 돌아가기(목록보기) 링크 추가 -->
+	<a href="/articles" class="btn btn-success">목록보기</a>
+</form>
+
+
+<!-- footer template -->
+{{>./layouts/footer}}
